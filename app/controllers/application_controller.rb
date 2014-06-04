@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def find_or_activate_by_email
-    user = User.find_by_email(params[:email])
+    user = User.find_by_email(params[:email].downcase)
     if user
       user.update_attributes(user_params)
     else
