@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def send_manage_link
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: params[:email].downcase)
     if user
       UserMailer.management_link(user).deliver
       flash[:notice] = "Management link sent."
