@@ -17,13 +17,6 @@ class User < ActiveRecord::Base
     limit(10).order("total_kudos DESC")
   end
 
-  def self.lowercase_existing_emails
-    self.all.each do |user|
-      user.email = user.email.downcase
-      user.save!
-    end
-  end
-
   def name
     [first_name, last_name].compact.join(" ")
   end
