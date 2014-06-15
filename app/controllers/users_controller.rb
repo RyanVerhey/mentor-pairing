@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   end
 
   def find_mentor
-      user = User.find_by_email(params[:email].downcase)
+      user = User.find_by_email(params[:email].downcase.strip)
 
       respond_to do |format|
         format.json do
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def send_manage_link
-    user = User.find_by(email: params[:email].downcase)
+    user = User.find_by(email: params[:email].downcase.strip)
     if user
       UserMailer.management_link(user).deliver
       flash[:notice] = "Management link sent."

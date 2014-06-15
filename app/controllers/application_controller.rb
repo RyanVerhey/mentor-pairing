@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   private
 
   def find_or_activate_by_email
-    user = User.find_by_email(params[:email].downcase)
+    user = User.find_by_email(params[:email].downcase.strip)
     if user
       user.update_attributes(user_params)
     else
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def user_params
     [:first_name, :last_name, :twitter_handle, :email, :bio, :interests, :gravatar_url].inject({}) do |hash, attribute|
       if attribute == :email
-        hash.merge(attribute => params[attribute].downcase)
+        hash.merge(attribute => params[attribute].downcase.strip)
       else
         hash.merge(attribute => params[attribute])
       end

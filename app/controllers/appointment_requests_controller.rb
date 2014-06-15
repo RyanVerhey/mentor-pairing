@@ -6,7 +6,7 @@ class AppointmentRequestsController < ApplicationController
 
   def create
     @availability = Availability.find_by_id(params[:availability_id])
-    mentee = User.find_by_email(params[:email].downcase)
+    mentee = User.find_by_email(params[:email].downcase.strip)
 
     if mentee && mentee.activated?
       flash[:notice] = "An email has been sent to #{@availability.mentor.first_name}. Once they confirm the appointment, we'll let you know."
